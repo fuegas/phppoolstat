@@ -1,0 +1,1 @@
+# Phppoolstat (a Telegraf exec)
