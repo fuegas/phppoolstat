@@ -12,6 +12,10 @@ VERSION ?= $(shell git describe 2>/dev/null)
 PKG_NAME ?= "$(BINARY)"
 PKG_DESCRIPTION ?= "Tally PHP-FPM pool workers for Telegraf"
 PKG_BIN_DIR ?= "/usr/sbin/"
+PKG_LICENSE ?= "MIT"
+PKG_VENDOR ?= "unknown"
+PKG_MAINTAINER ?= "$(shell git config user.name) <$(shell git config user.email)>"
+PKG_URI ?= "https://github.com/fuegas/phppoolstat"
 
 # Add defines for commit, branch and version
 LDFLAGS += -X main.commit=$(COMMIT) -X main.branch=$(BRANCH)
@@ -67,12 +71,16 @@ deb: binary
 	@fpm \
 		--input-type dir \
 		--output-type deb \
-		--name "$(PKG_NAME)" \
-		--description "$(PKG_DESCRIPTION)" \
-		--version "$(VERSION)" \
 		--deb-no-default-config-files \
-		--architecture $(BUILDARCH) \
 		--force \
+		--architecture $(BUILDARCH) \
+		--description $(PKG_DESCRIPTION) \
+		--license $(PKG_LICENSE) \
+		--maintainer $(PKG_MAINTAINER) \
+		--name "$(PKG_NAME)" \
+		--url $(PKG_URI) \
+		--vendor $(PKG_VENDOR) \
+		--version "$(VERSION)" \
 		$(BINARY)="$(PKG_BIN_DIR)"
 
 .PHONY: rpm
@@ -80,10 +88,13 @@ rpm: binary
 	@fpm \
 		--input-type dir \
 		--output-type rpm \
-		--name "$(PKG_NAME)" \
-		--description "$(PKG_DESCRIPTION)" \
-		--version "$(VERSION)" \
-		--deb-no-default-config-files \
-		--architecture $(BUILDARCH) \
 		--force \
+		--architecture $(BUILDARCH) \
+		--description "$(PKG_DESCRIPTION)" \
+		--license $(PKG_LICENSE) \
+		--maintainer $(PKG_MAINTAINER) \
+		--name "$(PKG_NAME)" \
+		--url $(PKG_URI) \
+		--vendor $(PKG_VENDOR) \
+		--version "$(VERSION)" \
 		$(BINARY)="$(PKG_BIN_DIR)"
