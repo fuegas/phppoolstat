@@ -23,6 +23,9 @@ ifdef VERSION
 	LDFLAGS += -X main.version=$(VERSION)
 endif
 
+# Remove DWARF tables
+LDFLAGS += -s -w
+
 # Base BUILDARCH on GOARCH
 ifeq ($(GOARCH),386)
 	BUILDARCH = i386
@@ -38,7 +41,7 @@ all:
 binary:
 	@printf "Building... "
 	@date
-	@GOOS=$(OS) go build -v -i -o $(BINARY) -ldflags "$(LDFLAGS)" ./cmd/$(BINARY).go && echo "\033[32;1mBuild success ヽ(°□°)ﾉ\033[0m" || (echo "\033[31;1mBuild failed (╯°□°）╯︵ ┻━┻\033[0m" && exit 1)
+	@GOOS=$(OS) GO111MODULE=auto go build -v -o $(BINARY) -ldflags "$(LDFLAGS)" ./cmd/$(BINARY).go && echo "\033[32;1mBuild success ヽ(°□°)ﾉ\033[0m" || (echo "\033[31;1mBuild failed (╯°□°）╯︵ ┻━┻\033[0m" && exit 1)
 
 .PHONY: fmt
 fmt:
