@@ -19,9 +19,9 @@ can be found below at [measurements](#measurements).
 
 The above configuration would result in output like:
 ```
-> phppoolstat,host=tengu,env=production,pool=prd_pool count=12i 1562471764000000000
-> phppoolstat,host=tengu,env=production,pool=acc_pool count=6i 1562471764000000000
-> phppoolstat,host=tengu,env=production,pool=_all_ count=18i 1562471764000000000
+> phppoolstat,env=production,pool=prd_pool count=12i 1562471764000000000
+> phppoolstat,env=production,pool=acc_pool count=6i 1562471764000000000
+> phppoolstat,env=production,pool=_all_ count=18i 1562471764000000000
 ```
 
 ## Measurements
